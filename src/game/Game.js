@@ -44,7 +44,7 @@ export class Game {
     this.syncStage(true);
     this.app.ticker.add(ticker => this.tick(ticker.deltaMS / 1000));
     window.addEventListener('resize', () => this.world.resize());
-    setInterval(() => { this.save.save(this.s); this.ui.render(); }, 500);
+    setInterval(() => { this.save.save(this.s); this.ui.renderQuick(); }, 500);
     this.ui.render();
   }
 
