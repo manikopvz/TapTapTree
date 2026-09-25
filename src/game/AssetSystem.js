@@ -1,1 +1,16 @@
-import{Assets,Texture}from'pixi.js';const base=import.meta.env.BASE_URL;export const ASSET_URLS={apple:base+'assets/images/apple.webp',goldenApple:base+'assets/images/golden-apple.webp',leaf:base+'assets/images/leaf.webp'};export class AssetSystem{async load(){await Assets.load(Object.values(ASSET_URLS));return this}texture(k){return Texture.from(ASSET_URLS[k])}}
+import { Assets, Texture } from 'pixi.js';
+import appleUrl from '../../assets/images/apple.webp?url';
+import goldenAppleUrl from '../../assets/images/golden-apple.webp?url';
+import leafUrl from '../../assets/images/leaf.webp?url';
+
+export const ASSET_URLS = { apple: appleUrl, goldenApple: goldenAppleUrl, leaf: leafUrl };
+
+export class AssetSystem {
+  async load() {
+    await Assets.load(Object.values(ASSET_URLS));
+    return this;
+  }
+  texture(key) {
+    return Texture.from(ASSET_URLS[key]);
+  }
+}

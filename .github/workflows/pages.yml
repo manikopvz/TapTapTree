@@ -1,42 +1,47 @@
-name: Deploy GitHub Pages
+name: Build static Pages files
 on:
   push:
     branches: [main]
   workflow_dispatch:
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 concurrency:
-  group: pages
+  group: static-pages-build
   cancel-in-progress: true
 jobs:
   build:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm install
-      - run: npm run verify:art
-      - run: npm run build
-      - name: Verify built entrypoint
+      - name: Install dependencies
+        run: npm install
+      - name: Verify raster art policy
+        run: npm run verify:art
+      - name: Build production site
+        run: npm run build
+      - name: Verify complete build
         run: |
-          test -f dist/index.html
-          grep -q "/TapTapTree/assets/" dist/index.html
-          test "$(find dist/assets -type f | wc -l)" -gt 0
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+          test -f dist/app.html
+          test -d dist/assets/build
+          find dist/assets/build -type f -name '*.js' | grep -q .
+          find dist/assets/build -type f -name '*.webp' | grep -q .
+      - name: Publish build into branch root
+        run: |
+          rm -rf assets/build
+          mkdir -p assets/build
+          cp -R dist/assets/build/. assets/build/
+          cp dist/app.html index.html
+          touch .nojekyll
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html assets/build .nojekyll
+          if git diff --cached --quiet; then
+            echo "Static build already current."
+          else
+            git commit -m "Build static Pages files"
+            git push
+          fi
