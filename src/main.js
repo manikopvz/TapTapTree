@@ -1,1 +1,1 @@
-import {Game} from './game/Game.js';import './styles/game.css';window.addEventListener('DOMContentLoaded',()=>new Game(document.querySelector('#app')).start());
+import'./styles/game.css';import{Game}from'./game/Game.js';new Game(document.querySelector('#app')).start();
