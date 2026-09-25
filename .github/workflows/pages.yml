@@ -18,12 +18,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Install dependencies
-        run: npm install
-      - name: Verify raster art policy
-        run: npm run verify:art
-      - name: Build game
-        run: npm run build
+      - run: npm install
+      - run: npm run verify:art
+      - run: npm run build
+      - name: Verify built entrypoint
+        run: |
+          test -f dist/index.html
+          grep -q "/TapTapTree/assets/" dist/index.html
+          test "$(find dist/assets -type f | wc -l)" -gt 0
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

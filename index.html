@@ -1,1 +1,33 @@
-<!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Tap Tap Tree</title></head><body><div id="app"></div><script type="module" src="/src/main.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#15271b">
+<title>Tap Tap Tree</title>
+<style>
+html,body,#app{margin:0;width:100%;height:100%;background:#15271b;color:#fff;font-family:system-ui,sans-serif}
+#boot{position:fixed;inset:0;display:grid;place-items:center;background:#15271b;z-index:999999}
+#boot>div{max-width:560px;padding:24px;text-align:center}
+#boot h1{color:#ffd45c;margin:0 0 8px}
+#boot p{opacity:.8}
+#boot-error{display:none;text-align:left;white-space:pre-wrap;background:#09120d;padding:12px;border-radius:8px;color:#ffaaaa}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="boot"><div><h1>🍎 Tap Tap Tree</h1><p id="boot-status">Loading game…</p><pre id="boot-error"></pre></div></div>
+<script>
+window.__TTT_BOOT__=true;
+window.__TTT_FAIL__=function(e){
+ var p=document.getElementById('boot-error'),s=document.getElementById('boot-status');
+ if(s)s.textContent='Game startup failed';
+ if(p){p.style.display='block';p.textContent=(e&&e.stack)||(e&&e.message)||String(e)}
+};
+window.addEventListener('error',function(e){window.__TTT_FAIL__(e.error||e.message)});
+window.addEventListener('unhandledrejection',function(e){window.__TTT_FAIL__(e.reason)});
+setTimeout(function(){if(window.__TTT_BOOT__)window.__TTT_FAIL__('JavaScript bundle did not finish booting.');},10000);
+</script>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
