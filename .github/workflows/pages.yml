@@ -17,9 +17,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - name: Install dependencies
-        run: npm install
-      - name: Verify raster art policy
+        run: |
+          npm install
+          python -m pip install --disable-pip-version-check pillow
+      - name: Generate complete raster art set
+        run: python scripts/generate-art.py
+      - name: Verify complete art set
         run: npm run verify:art
       - name: Build production site
         run: npm run build
@@ -29,7 +36,9 @@ jobs:
           test -d dist/assets/build
           find dist/assets/build -type f -name '*.js' | grep -q .
           find dist/assets/build -type f -name '*.webp' | grep -q .
-      - name: Publish build into branch root
+          test "$(find dist/assets/build -type f -name '*.webp' | wc -l)" -ge 50
+          grep -q '/TapTapTree/assets/build/' dist/app.html
+      - name: Publish generated art and build into branch root
         run: |
           rm -rf assets/build
           mkdir -p assets/build
@@ -38,10 +47,10 @@ jobs:
           touch .nojekyll
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html assets/build .nojekyll
+          git add index.html assets/build assets/images .nojekyll
           if git diff --cached --quiet; then
             echo "Static build already current."
           else
-            git commit -m "Build static Pages files"
+            git commit -m "Build complete raster game assets"
             git push
           fi
