@@ -1,0 +1,2 @@
+# Game art assets
+Runtime art lives here. The current engine uses procedural PixiJS tree/particles while production PNG/WebP sprites are being added. Keep source artwork in assets/source and optimized runtime files here.
