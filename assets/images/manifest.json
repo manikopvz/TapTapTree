@@ -1,1 +1,82 @@
-{"format":"webp","svgAllowed":false,"runtime":{"apple":"apple.webp","goldenApple":"golden-apple.webp","leaf":"leaf.webp"},"policy":"All gameplay-visible art must be raster PNG/WebP loaded as PixiJS textures. SVG is prohibited."}
+{
+  "version": 2,
+  "format": "webp",
+  "svgAllowed": false,
+  "required": {
+    "backgrounds": [
+      "sky",
+      "mountains",
+      "islands",
+      "lake",
+      "forest",
+      "foreground"
+    ],
+    "trees": [
+      "young",
+      "apple",
+      "mature",
+      "ancient",
+      "mystic",
+      "cosmic",
+      "reality"
+    ],
+    "items": [
+      "apple",
+      "golden_apple",
+      "basket"
+    ],
+    "environment": [
+      "grass",
+      "rock",
+      "stage_sign"
+    ],
+    "fx": [
+      "leaf",
+      "spark",
+      "gold_swirl",
+      "blue_swirl",
+      "glow",
+      "magic_glow"
+    ],
+    "upgradeIcons": [
+      "tap",
+      "faster",
+      "critical",
+      "echo",
+      "rain",
+      "gold",
+      "frenzy"
+    ],
+    "skillIcons": [
+      "roots",
+      "trunk",
+      "branch",
+      "leaves",
+      "lucky",
+      "fruit",
+      "growth",
+      "abundance",
+      "rain"
+    ],
+    "achievementBadges": [
+      "first_apple",
+      "crown",
+      "sun",
+      "star",
+      "tree_master",
+      "crystal",
+      "purple_star",
+      "diamond",
+      "mystery"
+    ],
+    "ui": [
+      "title_panel",
+      "large_panel",
+      "button_gold",
+      "button_selected",
+      "progress_orange",
+      "slot"
+    ]
+  },
+  "policy": "All gameplay-visible art is committed raster WebP. Runtime Graphics is permitted only for invisible hit areas."
+}
