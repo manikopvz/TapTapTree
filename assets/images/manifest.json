@@ -1,0 +1,1 @@
+{"format":"webp","svgAllowed":false,"runtime":{"apple":"apple.webp","goldenApple":"golden-apple.webp","leaf":"leaf.webp"},"policy":"All gameplay-visible art must be raster PNG/WebP loaded as PixiJS textures. SVG is prohibited."}

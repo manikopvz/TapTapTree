@@ -1,1 +1,1 @@
-{"name":"tap-tap-tree","version":"3.0.0","private":true,"type":"module","scripts":{"dev":"vite","build":"vite build","preview":"vite preview"},"dependencies":{"howler":"^2.2.4","pixi.js":"^8.6.6"},"devDependencies":{"vite":"^6.1.0"}}
+{"name":"tap-tap-tree","version":"3.1.0","private":true,"type":"module","scripts":{"dev":"vite","build":"vite build","preview":"vite preview","verify:art":"node scripts/verify-art.mjs"},"dependencies":{"howler":"^2.2.4","pixi.js":"^8.6.6"},"devDependencies":{"vite":"^6.1.0"}}
