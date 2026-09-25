@@ -5,6 +5,7 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets/build',
+    assetsInlineLimit: 0,
     rollupOptions: { input: 'app.html' },
   },
 });
